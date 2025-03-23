@@ -10,6 +10,9 @@ Bargain hunter, collecting bargains you have seen and sharing them with other us
 
 Bargify is an upcoming mobile app, with the goal in allow users to find the best discounts, promotions and other bargins. Users on Bargify will be allowed to find and shares new bargins to other users, creating a community-driven platform for saving big. 
 
+This app will boast a simplistic design to allow all types of users to smoothly navigate around, and improve ease-of-use.
+
+
 ## Features
 
 **Sales list** 
@@ -22,8 +25,28 @@ Bargify is an upcoming mobile app, with the goal in allow users to find the best
 - Submissions will be processed, and stored in a database in the backend
 
 
-**Acccount**
+**Account**
 - In order to submit deals and promotions, users must create an account and log-in.
+- When creating an account, wishlist system is in place to allow users to save coupons and promotions for later use.
+
+## Users
+Many users will like to use Bargify for its straightforward, and simplistic design. Casual users, frequent or holiday shoppers, and students are the main users of Bargify.
+
+**Casual users**
+
+Casual users are individuals who would uses the app occasionally, and not deeply invested in frequent use. These users engage with Bargify for specific purposes such as finding deals for specific products and within short sessions, whilst not consistently engaging with every features. These users may choose Bargify over competitors due to our app's simplistic and easy to use nature.
+
+**Frequent Shoppers**
+
+Frequent Shoppers are individuals who would use the app regularly as a part of their shopping experience. These users engage with Bartify frequently and consistently to help them in finding deals before making purchases. Furthermore, these users will likely use all aspect of the app such as adding new deals in the database.
+
+**Students**
+
+Students are individuals who are typically attending high school or university who are managing a tight budget, thus often needs to find deals on everything. 
+
+
+
+
 
 
 
