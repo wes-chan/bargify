@@ -15,34 +15,69 @@ This app will boast a simplistic design to allow all types of users to smoothly 
 
 ## Features
 
-**Sales list** 
-- The main page of the app that will allow users to view deals and bargins that have been recorded by other users. 
-- There will be filters, and search feature that allows users to specifically find deals in certain categories.
-- Location service may be used to find deals within the user's radius.
+### Sales list
 
-**Deal submission**
-- Users will be able to submit deals and promotions to be displayed in the sales list
-- Submissions will be processed, and stored in a database in the backend
+The Sales List is the core feature of Bargify, serving as the central hub where users to view deals and bargins that have been recorded by other users. This area will house the main database that stores all the known deals that have been submitted by the users. Furthermore, the Sales List will be dynamic, meaning the list will be constantly updated to also ensure the most up-to-date information.
+
+#### Categories / Filtering and Sorting
+To ensure ease of usage and access, a filtering/sorting system will be essential. Users will be able to sort deals by many different ways such as:
+- **Category** - Users can filter based on categories such as fashion, electronics, food etc.
+- **Newest Deals** - Users can filter based on newest deals, allowing users to view fresh offers.
+- **Stores** - Users can filter based on stores. The algorithms will select valid offers that are specific to the store.
+- **Near User** - Users can filter coupons that are claimable within their location. The location service may be used to assist in this category.
 
 
-**Account**
-- In order to submit deals and promotions, users must create an account and log-in.
-- When creating an account, wishlist system is in place to allow users to save coupons and promotions for later use.
+### Deal submission
+
+The deal submission tab is another core feature of Bargify, with the goal in allowing users to submit any deals and promotions. These submitted deals will then be transferred to the Sales List's database, and viewed onto the platform. Bargify is community driven, thus users are encouraged to submit deals.
+
+- Submissions will be processed, and stored in the database in the backend
+- The data from the database will exported to the Sales List frequently
+- The submission detail will be structured in a simplistic way to ensure ease-of-use.
+    - Names
+    - Category
+    - Store's name
+    - Location
+    - Offer's start/end time
+    - A description on how to claim the deal
+
+### Account
+
+Account tab is a vital feature for Bargify, serving as a main way for users to engage with the app. Users needs to create an account in order to utilise all the features of the app. 
+
+#### Features that users unlock when account created
+- Users will be able to submit deals and promotions to contribute to the community
+- A wishlist system is in place to save coupon and promotions for later use
+- Create personalised profiles for others to see
+
+
 
 ## Users
 Many users will like to use Bargify for its straightforward, and simplistic design. Casual users, frequent or holiday shoppers, and students are the main users of Bargify.
 
 **Casual users**
 
-Casual users are individuals who would uses the app occasionally, and not deeply invested in frequent use. These users engage with Bargify for specific purposes such as finding deals for specific products and within short sessions, whilst not consistently engaging with every features. These users may choose Bargify over competitors due to our app's simplistic and easy to use nature.
+Casual users are individuals who would uses the app occasionally, and not deeply invested in frequent use. These users engages with Bargify for specific purposes such as finding deals for specific products and within short sessions, whilst not consistently engaging with every features. These users may choose Bargify over competitors due to our app's simplistic and easy to use nature.
 
 **Frequent Shoppers**
 
-Frequent Shoppers are individuals who would use the app regularly as a part of their shopping experience. These users engage with Bartify frequently and consistently to help them in finding deals before making purchases. Furthermore, these users will likely use all aspect of the app such as adding new deals in the database.
+Frequent Shoppers are individuals who would use the app regularly as a part of their shopping experience. These users engages with Bartify frequently and consistently to help them in finding deals before making purchases. Furthermore, these users will likely use all aspect of the app such as adding new deals in the database.
 
 **Students**
 
-Students are individuals who are typically attending high school or university who are managing a tight budget, thus often needs to find deals on everything. 
+Students are individuals who are typically attending high school or university who are managing a tight budget, thus often needs to find deals on everything. These users engages with Bartify with the primary focus in selecting deals for necessity and other means. In addition, these users will likely use all aspect of the app such as adding new deals in the database.
+
+## Persona
+**Casual users**:
+
+John Lee
+- Age: 30
+- Occupation: Bank Teller
+- Location: Urban area
+- Technology Proficiency: Medium
+
+Demographics
+
 
 
 
