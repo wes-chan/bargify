@@ -13,7 +13,7 @@ Bargify is an upcoming mobile app, with the goal in allow users to find the best
 This app will boast a simplistic design to allow all types of users to smoothly navigate around, and improve ease-of-use.
 
 
-## Features
+# Features
 
 ### Sales list
 
@@ -54,7 +54,7 @@ Account tab is a vital feature for Bargify, serving as a main way for users to e
 
 
 
-## Users
+# Users
 Many users will like to use Bargify for its straightforward, and simplistic design. Casual users, frequent or holiday shoppers, and students are the main users of Bargify.
 
 **Casual users**
@@ -69,7 +69,7 @@ Frequent Shoppers are individuals who would use the app regularly as a part of t
 
 Students are individuals who are typically attending high school or university who are managing a tight budget, thus often needs to find deals on everything. These users engages with Bartify with the primary focus in selecting deals for necessity and other means. In addition, these users will likely use all aspect of the app such as adding new deals in the database.
 
-## Persona
+# Persona
 ### Casual users
 
 #### John Lee
@@ -138,15 +138,20 @@ Fred is a 19-year-old student at the local university. He lives in an on-campus 
 
 
 
+# Wireframe
+![alt text](Wireframe.png)
+
+Figure 1 - The wireframe. Left page is the Home/Sales List page, Middle is Submission page and Right is the Account page.
+
+# 
 
 
 
 
 
 
+# Minimum viable product
 
-
-#
 
 
 
