@@ -1,13 +1,10 @@
+import 'package:bargify/constants.dart';
+import 'package:bargify/widgets/navkey.dart';
 import 'package:flutter/material.dart';
 import 'package:bargify/screen/deals.dart';
 
-import 'package:bargify/widgets/navkey.dart';
 
-var myLightColor = ColorScheme.fromSeed(seedColor: const Color.fromARGB(255,27,154,170));
 
-const primaryColor = Color(0xFFF8FFE5);
-const secondaryColor = Color(0xFF1B9AAA);
-const accentColor = Color(0xFF06D6A0);
 
 void main(){
 
@@ -19,6 +16,8 @@ void main(){
 }
 
 class MyApp extends StatelessWidget{
+  const MyApp({super.key});
+
 
 
 @override
@@ -26,15 +25,16 @@ class MyApp extends StatelessWidget{
   return MaterialApp(
     title: 'Bargify',
     theme: ThemeData().copyWith(
-      colorScheme: myLightColor,
+      scaffoldBackgroundColor: bgColor,
       appBarTheme: const AppBarTheme().copyWith(
         backgroundColor: secondaryColor,
         foregroundColor: Colors.white,
       ),
+      
     ),
   
 
-      home: Deals(),
+      home: NavKey(),
     );
 }
 

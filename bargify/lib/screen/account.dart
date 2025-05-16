@@ -3,14 +3,14 @@ import 'package:bargify/widgets/navkey.dart';
 import 'package:flutter/material.dart';
 
 
-class Deals extends StatefulWidget{
-  const Deals({super.key});
+class Account extends StatefulWidget{
+  const Account ({super.key});
 
   @override
-  State<Deals> createState() => _Deals();
+  State<Account> createState() => _Account();
 }
 
-class _Deals extends State<Deals>{
+class _Account extends State<Account>{
   @override
   Widget build(BuildContext context){
     return Center(
@@ -19,7 +19,7 @@ class _Deals extends State<Deals>{
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Deals"),
+            Text("Account"),
           ],
         ),
         
