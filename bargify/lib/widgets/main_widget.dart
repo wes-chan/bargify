@@ -2,7 +2,7 @@
 import 'package:bargify/constants.dart';
 import 'package:bargify/screen/account.dart';
 import 'package:bargify/screen/deals.dart';
-import 'package:bargify/screen/submit.dart';
+import 'package:bargify/widgets/form.dart';
 import 'package:flutter/material.dart';
 
 class NavKey extends StatefulWidget{
@@ -14,6 +14,18 @@ class NavKey extends StatefulWidget{
 
 }
 
+void _showForm(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const Forms()
+      
+      
+      )
+  );
+}
+
+
 
 
 class _NavKey extends State<NavKey>{
@@ -22,14 +34,20 @@ class _NavKey extends State<NavKey>{
 
   final List<Widget> _pages = [
     Deals(),
-    Submit(),
+    Forms(),
     Account(),
   ];
 
+  
+
 void _onItemTapped(int index){
+  if (index == 1){
+    _showForm(context);
+  } else {
   setState((){
     _selectedIndex = index;
   });
+  }
 }
 
 
@@ -41,6 +59,7 @@ void _onItemTapped(int index){
         title: const Text("Bargify",
           style:TextStyle(
             fontWeight: FontWeight.bold,
+            
             fontSize: 30,
           )
         

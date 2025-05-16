@@ -1,7 +1,6 @@
 import 'package:bargify/constants.dart';
-import 'package:bargify/widgets/navkey.dart';
+import 'package:bargify/widgets/main_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:bargify/screen/deals.dart';
 
 
 
@@ -25,6 +24,7 @@ class MyApp extends StatelessWidget{
   return MaterialApp(
     title: 'Bargify',
     theme: ThemeData().copyWith(
+      
       scaffoldBackgroundColor: bgColor,
       appBarTheme: const AppBarTheme().copyWith(
         backgroundColor: secondaryColor,
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget{
     ),
   
 
-      home: NavKey(),
+      home: const NavKey(),
     );
 }
 
