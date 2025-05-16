@@ -1,18 +1,13 @@
+import 'package:bargify/constants.dart';
+import 'package:bargify/widgets/navkey.dart';
 import 'package:flutter/material.dart';
 
 
-/* Color Scheme
-F8FFE5 - Primary
-1B9AAA - Secondary
-06D6A0 - Accent
-
-*/
-
 class Deals extends StatefulWidget{
-  
-  State<Deals> createState(){
-    return _Deals();
-  }
+  const Deals({super.key});
+
+  @override
+  State<Deals> createState() => _Deals();
 }
 
 class _Deals extends State<Deals>{
@@ -22,7 +17,6 @@ class _Deals extends State<Deals>{
        appBar: AppBar(
         title: const Text("Bargify",
           style:TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 30,
           )
@@ -31,8 +25,8 @@ class _Deals extends State<Deals>{
           
 
         
-        backgroundColor: Color(0xFF1B9AAA),
-        elevation: 20, // Optional: shadow effect
+      
+        elevation: 20,
       ),
       body: Center(
         child: Column(
@@ -42,6 +36,8 @@ class _Deals extends State<Deals>{
           ],
         ),
       ),
+
+      bottomNavigationBar: NavKey(),
 
 
 
