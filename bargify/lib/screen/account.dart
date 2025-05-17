@@ -1,3 +1,4 @@
+import 'package:bargify/constants.dart';
 import 'package:flutter/material.dart';
 
 
@@ -17,6 +18,7 @@ class _Account extends State<Account>{
         
         
         Card(
+            color: cardColor,
              shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
              ),
@@ -32,13 +34,50 @@ class _Account extends State<Account>{
                   CircleAvatar(
                     radius: 50,
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 16),
+                    child: Text(
                     'Hi, Guest',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+
                   ),
+                  ),
+              
+                  Row (
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                 children: [
+                  ElevatedButton.icon(
+                    onPressed: () {  },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      foregroundColor: bgColor,
+                      
+
+                    ),
+                    icon: Icon(Icons.login, color: bgColor),
+                    label: Text("Log in", style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),),
+                  
+                  ),
+                     ElevatedButton.icon(
+                      onPressed: () {  },
+                       style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      foregroundColor: bgColor,
+
+                    ),
+                      icon: Icon(Icons.settings, color: bgColor, ),
+                      
+                      label: Text("Settings", style: TextStyle(
+                        fontWeight: FontWeight.bold,
+
+                      )) ,
+                     
+                     ),
+                 ]
+                  
+                  )
 
 
                 ]
@@ -51,10 +90,10 @@ class _Account extends State<Account>{
              
         ),
 
-        SizedBox(height: 20),
+        SizedBox(height: 10),
 
         Card(
-
+          color: cardColor,
               shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
               
@@ -66,11 +105,28 @@ class _Account extends State<Account>{
             mainAxisSize: MainAxisSize.min,
 
             children: [
-              Text("Watch List", style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text("Watch List", style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                
+                ),
+                
+                
+                ),
+              ),
 
-              ),),
+          
+              SizedBox(
+                height: 300,
+
+              )
+
+
+
+
+
             ],
 
           )
