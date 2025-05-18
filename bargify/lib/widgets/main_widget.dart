@@ -4,6 +4,7 @@ import 'package:bargify/screen/account.dart';
 import 'package:bargify/screen/deals.dart';
 import 'package:bargify/widgets/form.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NavKey extends StatefulWidget{
   const NavKey({super.key});
@@ -42,7 +43,22 @@ class _NavKey extends State<NavKey>{
 
 void _onItemTapped(int index){
   if (index == 1){
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null){
+
+      ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('You must be logged in to use this feature.',style:TextStyle(color: bgColor)),
+        duration: Duration(seconds: 1),
+        backgroundColor: primaryColor,
+            
+      )
+     
+      );
+
+    } else {
     _showForm(context);
+    }
   } else {
   setState((){
     _selectedIndex = index;

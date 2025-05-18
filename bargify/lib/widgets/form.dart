@@ -1,3 +1,4 @@
+import 'package:bargify/constants.dart';
 import 'package:flutter/material.dart';
 
 class Forms extends StatelessWidget {
@@ -8,6 +9,8 @@ class Forms extends StatelessWidget {
     return Scaffold(
 
       appBar: AppBar(
+        backgroundColor: bgColor,
+        foregroundColor: secondaryColor,
         title: const Text('Submit Deal',
         style: TextStyle(
           fontSize: 30,

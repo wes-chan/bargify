@@ -1,5 +1,7 @@
 import 'package:bargify/constants.dart';
+import 'package:bargify/screen/login.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class Account extends StatefulWidget{
@@ -10,15 +12,40 @@ class Account extends StatefulWidget{
 }
 
 class _Account extends State<Account>{
+
+     final FirebaseAuth _auth = FirebaseAuth.instance;
+
+     Future<void> _signOut() async {
+      await _auth.signOut();
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Signed out successfully!',style:TextStyle(color: bgColor)),
+        duration: Duration(seconds: 1),
+        backgroundColor: primaryColor,
+            
+      )
+     
+          
+      );
+
+   }
+
   @override
+
+  
   Widget build(BuildContext context){
+ 
+
     return Scaffold(
-      body: ListView(
+      body: Column(
       children:[
         
         
         Card(
-            color: cardColor,
+    
+         color: cardColor, 
              shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
              ),
@@ -46,19 +73,57 @@ class _Account extends State<Account>{
                   Row (
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                  children: [
-                  ElevatedButton.icon(
-                    onPressed: () {  },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      foregroundColor: bgColor,
-                      
-
-                    ),
-                    icon: Icon(Icons.login, color: bgColor),
-                    label: Text("Log in", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),),
                   
+                  StreamBuilder<User?>(
+                    stream: _auth.authStateChanges(),
+                    builder: (context, snapshot) {
+                      final user = snapshot.data;
+                      if (user == null){
+                      return ElevatedButton.icon(
+
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Login()),
+                          );
+                        },
+                        
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: primaryColor,
+                          foregroundColor: bgColor,
+                          
+                      
+                        ),
+                        icon: Icon(Icons.login, color: bgColor),
+                        label: Text("Log In", style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),),
+                      
+                      );
+                    } else {
+
+                      return ElevatedButton.icon(
+
+                        onPressed: _signOut,
+                            
+                       
+                        
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: primaryColor,
+                          foregroundColor: bgColor,
+                          
+                      
+                        ),
+                        icon: Icon(Icons.login, color: bgColor),
+                        label: Text("Log out", style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),),
+                      
+                      );
+                      
+                    }
+                
+                    }
                   ),
                      ElevatedButton.icon(
                       onPressed: () {  },
@@ -71,6 +136,7 @@ class _Account extends State<Account>{
                       
                       label: Text("Settings", style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        
 
                       )) ,
                      
@@ -120,6 +186,10 @@ class _Account extends State<Account>{
           
               SizedBox(
                 height: 300,
+                child: ListView(
+
+                  
+                )
 
               )
 
