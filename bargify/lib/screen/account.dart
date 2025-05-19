@@ -39,7 +39,7 @@ class _Account extends State<Account>{
  
 
     return Scaffold(
-      body: Column(
+      body: ListView(
       children:[
         
         
@@ -185,7 +185,7 @@ class _Account extends State<Account>{
 
           
               SizedBox(
-                height: 300,
+                height: 275,
                 child: ListView(
 
                   
