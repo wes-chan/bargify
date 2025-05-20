@@ -10,7 +10,7 @@ class Forms extends StatelessWidget {
 
       appBar: AppBar(
         backgroundColor: bgColor,
-        foregroundColor: secondaryColor,
+        foregroundColor: primaryColor,
         title: const Text('Submit Deal',
         style: TextStyle(
           fontSize: 30,

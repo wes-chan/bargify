@@ -92,7 +92,7 @@ class _Deals extends State<Deals>{
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(deal.storeName, style: TextStyle( fontWeight: FontWeight.bold,),), // Location
-                                Text("Price: \$${deal.price}"), // Price
+                                Text("Price: \$${deal.price.toStringAsFixed(2)}"), // Price
                                 Text("Ends: ${deal.timeLeft()} days"), // Time
                                            
                                            
@@ -107,7 +107,7 @@ class _Deals extends State<Deals>{
                        ),
                        trailing: Icon(Icons.arrow_forward_ios),
                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => DealExpanded()),
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => DealExpanded(deal: deal)),
                           );
                        }
                       ),
