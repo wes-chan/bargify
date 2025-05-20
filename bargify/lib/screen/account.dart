@@ -114,7 +114,7 @@ class _Account extends State<Account>{
                           
                       
                         ),
-                        icon: Icon(Icons.login, color: bgColor),
+                        icon: Icon(Icons.logout, color: bgColor),
                         label: Text("Log out", style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),),
