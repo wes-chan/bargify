@@ -45,3 +45,9 @@ class Deal {
   }
 
 }
+
+class CategoryModel {
+  static const List<String> categoryOptions = ['Electronics', 'Home & Living', 'Fashion', 'Toys & Games', 'Beauty', 'Automotive', 'Other'];
+
+}
+

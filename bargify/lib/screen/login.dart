@@ -29,6 +29,16 @@ class _LoginState extends State<Login> {
   final _registerPasswordController = TextEditingController();
   final _registerConfirmPasswordController = TextEditingController();
 
+@override
+  void dispose() {
+    _loginEmailController.dispose();
+    _loginPasswordController.dispose();
+    _registerEmailController.dispose();
+    _registerPasswordController.dispose();
+    _registerConfirmPasswordController.dispose();
+    super.dispose();
+  }
+
   bool isLogin = true;
 
   bool loginSuccess = false;
@@ -56,16 +66,22 @@ class _LoginState extends State<Login> {
       ),
      
         body: Center(
+             
+       
     
           
           child: Card(
+            
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
             elevation: 4,
             color: cardColor,
-             margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
+             margin: const EdgeInsets.only(left: 24, right: 24, bottom: kToolbarHeight),
+             
+         
             child: Padding(
+              
               padding: const EdgeInsets.only(top: 24, bottom: 32,),
               child: isLogin ? _loginPage() : _registerPage(),
             )
@@ -73,9 +89,7 @@ class _LoginState extends State<Login> {
         ),
       
 
-      bottomNavigationBar: BottomAppBar(
-        color: bgColor,
-      ),
+     
     
     );
   }
