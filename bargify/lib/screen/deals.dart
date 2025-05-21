@@ -3,6 +3,7 @@ import 'package:bargify/widgets/dealexpanded.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bargify/models/dealmodels.dart';
+import 'package:intl/intl.dart';
 
 
 
@@ -14,6 +15,11 @@ class Deals extends StatefulWidget{
 }
 
 class _Deals extends State<Deals>{
+
+  String formatDate(DateTime time){
+    return DateFormat('dd-MM-yyyy').format(time);
+  }
+
   @override
   Widget build(BuildContext context){
     return StreamBuilder<QuerySnapshot>(
@@ -93,7 +99,8 @@ class _Deals extends State<Deals>{
                               children: [
                                 Text(deal.storeName, style: TextStyle( fontWeight: FontWeight.bold,),), // Location
                                 Text("Price: \$${deal.price.toStringAsFixed(2)}"), // Price
-                                Text("Ends: ${deal.timeLeft()} days"), // Time
+                                Text("Starts: ${formatDate(deal.start)}"), // Time
+                                Text("Ends: ${formatDate(deal.end)}"), // Time
                                            
                                            
                          

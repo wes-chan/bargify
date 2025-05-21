@@ -1,6 +1,8 @@
 import 'package:bargify/constants.dart';
 import 'package:bargify/models/dealmodels.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 
 class Forms extends StatefulWidget {
   const Forms({super.key});
@@ -15,12 +17,20 @@ class Forms extends StatefulWidget {
 class _Forms extends State<Forms> {
 
 // Controllers
+final _titleController = TextEditingController();
+final _priceController = TextEditingController();
+final _storeNameController = TextEditingController();
+final _locationController = TextEditingController();
+final _descriptionController = TextEditingController();
+
+// For displaying
 final _startController = TextEditingController();
 final _endController = TextEditingController();
 
 
 DateTime? _startDate; 
-DateTime? _endDate; 
+DateTime? _endDate;
+String? _selectedCategory;
 
     Future<void> _openStartPicker() async{
       
@@ -96,9 +106,12 @@ DateTime? _endDate;
                 
                   Column(
                     children: [
-                    TextField( decoration: const InputDecoration(
+                    TextField( 
+                      decoration: const InputDecoration(
                           labelText: 'Title',
-                         )),
+                         ),
+                          controller: _titleController,
+                         ),
 
                     SizedBox(height: 10),
                     Row(
@@ -117,9 +130,14 @@ DateTime? _endDate;
 
                           }).toList(),
 
-                          onChanged: (String? category){
-                            print('Selected:');
-                          }
+                          onChanged: (String? value){
+                            setState(() {
+                            _selectedCategory = value;
+                            
+                            }
+                            );
+                          },
+                          value: _selectedCategory,
                           ),
                         ),
 
@@ -127,6 +145,7 @@ DateTime? _endDate;
 
                           Expanded(
                           child: TextField( 
+                            controller: _priceController,
                             decoration: const InputDecoration(
                              labelText: 'Price',
                              prefixText: '\$',
@@ -147,11 +166,16 @@ DateTime? _endDate;
                     SizedBox(height: 10),
                     
 
-                    TextField( decoration: const InputDecoration(
+                    TextField(
+                      controller: _storeNameController,
+                       decoration: const InputDecoration(
+                     
                           labelText: 'Store Name',
                          )),
                     
-                     TextField( decoration: const InputDecoration(
+                     TextField(
+                      controller: _locationController,
+                       decoration: const InputDecoration(
                           labelText: 'Location',
                          )),
 
@@ -212,7 +236,9 @@ DateTime? _endDate;
 
 
 
-                     TextField( decoration: const InputDecoration(
+                     TextField( 
+                      controller: _descriptionController,
+                      decoration: const InputDecoration(
         
                           labelText: 'Description',
                           
@@ -224,7 +250,68 @@ DateTime? _endDate;
                 width: double.infinity,
                 child: ElevatedButton(
                          
-                  onPressed:(){},
+                  onPressed:() async {
+                    if (
+                      _titleController.text.isEmpty ||
+                      _priceController.text.isEmpty ||
+                      _storeNameController.text.isEmpty ||
+                      _locationController.text.isEmpty ||
+                      _descriptionController.text.isEmpty ||
+                      _startDate == null || _endDate == null ||
+                      _selectedCategory == null
+                       
+                      ){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                         SnackBar(
+                         content: Text("Please fill all fields", style:TextStyle(color: bgColor),),
+                         duration: Duration(seconds: 1),
+                         backgroundColor: primaryColor,
+                      )
+                        );
+                        return;
+          
+                      }
+
+                     final instance = Deal(
+                      id: '',
+                      name: _titleController.text,
+                      description: _descriptionController.text,
+                      storeName: _storeNameController.text,
+                      location: _locationController.text,
+                      category: _selectedCategory!,
+                      price: double.parse(_priceController.text),
+                      start: _startDate!,
+                      end: _endDate!,
+                     );
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                         SnackBar(
+                         content: Text("Deal submitted!", style:TextStyle(color: bgColor),),
+                         duration: Duration(seconds: 1),
+                         backgroundColor: primaryColor,
+                      )
+                        );
+
+                      final data = FirebaseFirestore.instance.collection('deals').doc();
+                      await data.set({
+                        'name': instance.name,
+                        'Description': instance.description,
+                        'storeName': instance.storeName,
+                        'Location': instance.location,
+                        'category': instance.category,
+                        'Price': instance.price,
+                        'Start': instance.start,
+                        'End': instance.end,
+
+                      });
+
+
+
+
+
+
+
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,
                     foregroundColor: bgColor,

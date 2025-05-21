@@ -38,11 +38,7 @@ class Deal {
     );
   }
 
-  int timeLeft(){
-    final now = DateTime.now();
-    return end.difference(now).inDays;
 
-  }
 
 }
 
