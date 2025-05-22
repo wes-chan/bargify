@@ -1,27 +1,42 @@
 import 'package:bargify/constants.dart';
+import 'package:bargify/models/dealmodels.dart';
 import 'package:bargify/widgets/dealexpanded.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bargify/models/dealmodels.dart';
-import 'package:intl/intl.dart';
 
-
-
-class Deals extends StatefulWidget{
-  const Deals({super.key});
+class WatchList extends StatefulWidget{
+  const WatchList({super.key});
 
   @override
-  State<Deals> createState() => _Deals();
+  State<WatchList> createState() => _WatchListState();
+
+
+
+
+
 }
 
-class _Deals extends State<Deals>{
-
-
-
+class _WatchListState extends State<WatchList>{
   @override
-  Widget build(BuildContext context){
-    return StreamBuilder<QuerySnapshot>(
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      appBar: AppBar(
+           title: Text("Watch List",
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+
+
+        ),
+           ),
+        
+        backgroundColor: bgColor,
+        foregroundColor: primaryColor,
+      
+        
+      ),
+     body: StreamBuilder<QuerySnapshot>(
       stream:  FirebaseFirestore.instance.collection('deals').snapshots(),
       builder: (context, snapshot) {
 
@@ -57,7 +72,8 @@ class _Deals extends State<Deals>{
 
       // Access the database of deals
         final deals = snapshot.data!.docs.map((doc){
-         
+          print(doc.data());
+
               final data = doc.data() as Map<String, dynamic>;
               return Deal.fromFirestore(doc.id, data);
             }).toList();
@@ -77,13 +93,7 @@ class _Deals extends State<Deals>{
                       //Placeholders 
                        leading: IconButton(
                         
-                        onPressed: () async{
-                          final user = FirebaseAuth.instance.currentUser;
-                          if (user == null){
-
-                          }
-
-                        },
+                        onPressed: (){},
         
                        icon: Icon(
                         Icons.star_border_rounded, 
@@ -121,9 +131,10 @@ class _Deals extends State<Deals>{
                        ),
                        trailing: Icon(Icons.arrow_forward_ios),
                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => DealExpanded(deal: deal)),
-                          );
+
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => DealExpanded(deal: deal)));
                        }
+                       
                       ),
               
         
@@ -134,8 +145,10 @@ class _Deals extends State<Deals>{
         
         );
       }
+    )
+
+
+
     );
   }
-
-
 }

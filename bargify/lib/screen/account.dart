@@ -1,5 +1,6 @@
 import 'package:bargify/constants.dart';
 import 'package:bargify/screen/login.dart';
+import 'package:bargify/widgets/watchlist.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -44,7 +45,7 @@ class _Account extends State<Account>{
         
         
         Card(
-    
+          margin: EdgeInsets.all(16),
          color: cardColor, 
              shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
@@ -145,6 +146,8 @@ class _Account extends State<Account>{
                   
                   )
 
+                  
+
 
                 ]
 
@@ -153,55 +156,53 @@ class _Account extends State<Account>{
 
              )
 
+
+
              
         ),
 
-        SizedBox(height: 10),
-
-        Card(
-          color: cardColor,
-              shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-              
-           
-          ),
-           elevation: 4,
-           
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text("Watch List", style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                
-                ),
-                
-                
-                ),
-              ),
-
-          
-              SizedBox(
-                height: 275,
-                child: ListView(
-
+      Card(
+              elevation: 4,
+               margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8 ),
+               color: cardColor,
+                child: ListTile(
                   
-                )
+                       leading: Icon(Icons.bookmark_border, color: primaryColor),
+              
+        
+                        
+                       title: Text("Watch List",style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+        
+                       ),),
 
-              )
+                       subtitle: Text("Your watch list"),
+                       
+
+                       trailing: Icon(Icons.arrow_forward_ios),
+                       onTap: () {
+                       
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => WatchList()));
+                       
+                        
+                       }
+                      ),
+              
+        
+        
+            )
+
+            
+
+        ]
+      
 
 
 
 
-
-            ],
-
-          )
-        )
-      ]
+      
+      
 
       )
     );
