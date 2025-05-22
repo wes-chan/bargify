@@ -2,6 +2,7 @@ import 'package:bargify/constants.dart';
 import 'package:bargify/models/dealmodels.dart';
 import 'package:bargify/widgets/dealexpanded.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class WatchList extends StatefulWidget{
@@ -17,6 +18,8 @@ class WatchList extends StatefulWidget{
 }
 
 class _WatchListState extends State<WatchList>{
+
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +39,14 @@ class _WatchListState extends State<WatchList>{
       
         
       ),
+
+      
+
+      
      body: StreamBuilder<QuerySnapshot>(
-      stream:  FirebaseFirestore.instance.collection('deals').snapshots(),
+
+      
+      stream:  FirebaseFirestore.instance.collection('users').doc(user?.uid).collection('watchlist').snapshots(),
       builder: (context, snapshot) {
 
        if (snapshot.connectionState == ConnectionState.waiting) {
@@ -66,6 +75,7 @@ class _WatchListState extends State<WatchList>{
     );
       
   }
+
 
 
 

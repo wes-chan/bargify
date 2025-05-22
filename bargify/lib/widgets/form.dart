@@ -267,8 +267,10 @@ String? _selectedCategory;
                   child: ElevatedButton(
                            
                     onPressed:() async {
+                       final messenger = ScaffoldMessenger.of(context); 
                       if (double.tryParse(_priceController.text) == null){
-                        ScaffoldMessenger.of(context).showSnackBar(
+                        
+                        messenger.showSnackBar(
                            SnackBar(
                            content: Text("Please enter a correct price value", style:TextStyle(color: bgColor),),
                            duration: Duration(seconds: 1),
@@ -290,7 +292,7 @@ String? _selectedCategory;
                         _selectedCategory == null
                          
                         ){
-                          ScaffoldMessenger.of(context).showSnackBar(
+                          messenger.showSnackBar(
                            SnackBar(
                            content: Text("Please fill all fields", style:TextStyle(color: bgColor),),
                            duration: Duration(seconds: 1),
@@ -313,7 +315,7 @@ String? _selectedCategory;
                         end: _endDate!,
                        );
          
-                        ScaffoldMessenger.of(context).showSnackBar(
+                        messenger.showSnackBar(
                            SnackBar(
                            content: Text("Deal submitted!", style:TextStyle(color: bgColor),),
                            duration: Duration(seconds: 1),

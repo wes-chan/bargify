@@ -14,7 +14,9 @@ class Account extends StatefulWidget{
 
 class _Account extends State<Account>{
 
+
      final FirebaseAuth _auth = FirebaseAuth.instance;
+   
 
      Future<void> _signOut() async {
       await _auth.signOut();
@@ -182,9 +184,22 @@ class _Account extends State<Account>{
 
                        trailing: Icon(Icons.arrow_forward_ios),
                        onTap: () {
+
+
+                        
+                        if (_auth.currentUser == null){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                              content: Text("Please sign in to use Watch List", style:TextStyle(color: bgColor),),
+                              duration: Duration(seconds: 1),
+                              backgroundColor: primaryColor,
+                            )
+                            );
+
+                        } else {
                        
                          Navigator.push(context, MaterialPageRoute(builder: (context) => WatchList()));
-                       
+                        }
                         
                        }
                       ),

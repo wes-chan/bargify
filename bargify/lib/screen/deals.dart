@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bargify/models/dealmodels.dart';
-import 'package:intl/intl.dart';
+
 
 
 
@@ -79,9 +79,54 @@ class _Deals extends State<Deals>{
                         
                         onPressed: () async{
                           final user = FirebaseAuth.instance.currentUser;
+                          final messenger = ScaffoldMessenger.of(context); 
                           if (user == null){
-
+                             messenger.showSnackBar(
+                              SnackBar(
+                              content: Text("Please sign in to save this deal", style:TextStyle(color: bgColor),),
+                              duration: Duration(seconds: 1),
+                              backgroundColor: primaryColor,
+                            )
+                            
+                        );
+                        return;
                           }
+
+                          final data = FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(user.uid)
+                          .collection('watchlist')
+                          .doc(deal.id);
+
+                          await data.set({
+                            'name': deal.name,
+                          'Description': deal.description,
+                          'storeName': deal.storeName,
+                          'Location': deal.location,
+                          'category': deal.category,
+                          'Price': deal.price,
+                          'Start': deal.start,
+                          'End': deal.end,
+         
+                            
+
+
+
+
+                          });
+
+                 
+                            messenger.showSnackBar(
+                              SnackBar(
+                              content: Text("Deal has been saved", style:TextStyle(color: bgColor),),
+                              duration: Duration(seconds: 1),
+                              backgroundColor: primaryColor,
+                            )
+                            );
+
+
+
+
 
                         },
         
