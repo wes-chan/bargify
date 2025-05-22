@@ -1,9 +1,11 @@
 import 'package:bargify/constants.dart';
 import 'package:bargify/models/dealmodels.dart';
+import 'package:bargify/state/watchlist_state.dart';
 import 'package:bargify/widgets/dealexpanded.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WatchList extends StatefulWidget{
   const WatchList({super.key});
@@ -62,15 +64,18 @@ class _WatchListState extends State<WatchList>{
   // Check if snapshot has data before using it
   if (!snapshot.hasData || snapshot.data == null || snapshot.data!.docs.isEmpty) {
     return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
+   
         child: Card(
           color: cardColor,
-            child: Text("No deals are currently available.", style: TextStyle(color: primaryColor),)
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text("No deals saved.", style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold, fontSize: 18),),
+            )
+            
            
             ),
             
-      )
+      
 
     );
       
@@ -89,6 +94,8 @@ class _WatchListState extends State<WatchList>{
             }).toList();
         
         return ListView.builder(
+
+          
           itemCount: deals.length,
           itemBuilder: (BuildContext context, int index) {
             final deal = deals[index];
@@ -103,10 +110,18 @@ class _WatchListState extends State<WatchList>{
                       //Placeholders 
                        leading: IconButton(
                         
-                        onPressed: (){},
+                        onPressed: () async{
+                         final watchListState = Provider.of<WatchListState>(context, listen: false);
+                         await watchListState.removefromWatchList(deal.id);
+
+
+
+
+
+                        },
         
                        icon: Icon(
-                        Icons.star_border_rounded, 
+                        Icons.star_rounded, 
                         color: primaryColor, 
                         size: 30,
                        ),

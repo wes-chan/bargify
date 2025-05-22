@@ -1,6 +1,9 @@
 import 'package:bargify/constants.dart';
+import 'package:bargify/state/watchlist_state.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class Login extends StatefulWidget{
@@ -302,7 +305,14 @@ Widget _registerPage(){
         loginSuccess = true;
         print(crediental);
 
-        if (!mounted) return;
+          if (!mounted) return;
+
+         final watchListState = Provider.of<WatchListState>(context, listen: false);
+
+         watchListState.loadWatchlist();
+      
+
+    
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -372,9 +382,29 @@ Future<void> handleRegister() async{
       
 
       if (!mounted) return;
+
+      
+
+      final uid = credential.user!.uid;
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+
+
+      });
+
+       if (!mounted) return;
+     final watchListState = Provider.of<WatchListState>(context, listen: false);
+                     await watchListState.loadWatchlist();
+
+       
+        if (!mounted) return;
       Navigator.of(context).pop();
+
+     
+
+      
   
      ScaffoldMessenger.of(context).showSnackBar(
+      
           const SnackBar(
             content: Text('Account created successfully!',style:TextStyle(color: bgColor)),
             duration: Duration(seconds: 1),

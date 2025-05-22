@@ -1,9 +1,11 @@
 import 'package:bargify/constants.dart';
+import 'package:bargify/state/watchlist_state.dart';
 import 'package:bargify/widgets/dealexpanded.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bargify/models/dealmodels.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -17,10 +19,16 @@ class Deals extends StatefulWidget{
 
 class _Deals extends State<Deals>{
 
+    final user = FirebaseAuth.instance.currentUser;
+
+    
+
 
 
   @override
   Widget build(BuildContext context){
+
+  
     return StreamBuilder<QuerySnapshot>(
       stream:  FirebaseFirestore.instance.collection('deals').snapshots(),
       builder: (context, snapshot) {
@@ -30,6 +38,9 @@ class _Deals extends State<Deals>{
           child: CircularProgressIndicator(),
         );
    }
+
+
+
 
   if (snapshot.hasError) {
     return Center(child: Text("Error: Failed to connect"));
@@ -66,7 +77,14 @@ class _Deals extends State<Deals>{
           itemCount: deals.length,
           itemBuilder: (BuildContext context, int index) {
             final deal = deals[index];
+         
+            
 
+           return Consumer<WatchListState>(
+          builder: (BuildContext context, WatchListState watchListState, Widget? child) { 
+            final isInWatchList = watchListState.watchList.contains(deal.id);
+          
+         
 
             // Main Widgets 
             return Card(
@@ -78,7 +96,7 @@ class _Deals extends State<Deals>{
                        leading: IconButton(
                         
                         onPressed: () async{
-                          final user = FirebaseAuth.instance.currentUser;
+                      
                           final messenger = ScaffoldMessenger.of(context); 
                           if (user == null){
                              messenger.showSnackBar(
@@ -92,33 +110,14 @@ class _Deals extends State<Deals>{
                         return;
                           }
 
-                          final data = FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(user.uid)
-                          .collection('watchlist')
-                          .doc(deal.id);
+                          await watchListState.toggleStar(deal);
 
-                          await data.set({
-                            'name': deal.name,
-                          'Description': deal.description,
-                          'storeName': deal.storeName,
-                          'Location': deal.location,
-                          'category': deal.category,
-                          'Price': deal.price,
-                          'Start': deal.start,
-                          'End': deal.end,
-         
-                            
-
-
-
-
-                          });
+                    
 
                  
                             messenger.showSnackBar(
                               SnackBar(
-                              content: Text("Deal has been saved", style:TextStyle(color: bgColor),),
+                              content: Text(isInWatchList ? "Deal removed from Watch List" : "Deal has been saved", style:TextStyle(color: bgColor),),
                               duration: Duration(seconds: 1),
                               backgroundColor: primaryColor,
                             )
@@ -131,7 +130,7 @@ class _Deals extends State<Deals>{
                         },
         
                        icon: Icon(
-                        Icons.star_border_rounded, 
+                        isInWatchList ? Icons.star_rounded : Icons.star_border_rounded, 
                         color: primaryColor, 
                         size: 30,
                        ),
@@ -171,16 +170,25 @@ class _Deals extends State<Deals>{
                        }
                       ),
               
-        
-        
-            );
+          
             
-            },
+            
+            );
+       
+          
+          }
+           
+           );
+           
+          }
         
         );
       }
     );
   }
+
+
+
 
 
 }

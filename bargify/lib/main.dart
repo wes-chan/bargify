@@ -1,8 +1,10 @@
 import 'package:bargify/constants.dart';
 import 'package:bargify/firebase_options.dart';
+import 'package:bargify/state/watchlist_state.dart';
 import 'package:bargify/widgets/main_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -13,7 +15,15 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   
-  runApp(MyApp());
+  runApp(
+     ChangeNotifierProvider(
+      create: (context) => WatchListState(),
+
+    
+    
+    child: const MyApp()
+    )
+    );
     
 
 

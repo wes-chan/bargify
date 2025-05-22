@@ -1,8 +1,10 @@
 import 'package:bargify/constants.dart';
 import 'package:bargify/screen/login.dart';
+import 'package:bargify/state/watchlist_state.dart';
 import 'package:bargify/widgets/watchlist.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 
 class Account extends StatefulWidget{
@@ -20,7 +22,14 @@ class _Account extends State<Account>{
 
      Future<void> _signOut() async {
       await _auth.signOut();
-      if (!mounted) return;
+
+       if (!mounted) return;
+
+      final watchListState = Provider.of<WatchListState>(context, listen: false);
+      watchListState.clear();
+
+      
+     
 
       ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -108,6 +117,8 @@ class _Account extends State<Account>{
                       return ElevatedButton.icon(
 
                         onPressed: _signOut,
+                        
+                        
                             
                        
                         
