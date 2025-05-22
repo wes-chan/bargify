@@ -50,6 +50,8 @@ import 'package:flutter/material.dart';
                  Text(deal.location),
                  Text(deal.category),
                  Text("\$${deal.price.toStringAsFixed(2)}"),
+                 Text(deal.formatDate(deal.start)),
+                 Text(deal.formatDate(deal.end)),
 
                  const Divider(),
                  Text("Description", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),

@@ -16,9 +16,7 @@ class Deals extends StatefulWidget{
 
 class _Deals extends State<Deals>{
 
-  String formatDate(DateTime time){
-    return DateFormat('dd-MM-yyyy').format(time);
-  }
+
 
   @override
   Widget build(BuildContext context){
@@ -52,6 +50,9 @@ class _Deals extends State<Deals>{
     );
       
   }
+
+
+
 
       // Access the database of deals
         final deals = snapshot.data!.docs.map((doc){
@@ -99,8 +100,8 @@ class _Deals extends State<Deals>{
                               children: [
                                 Text(deal.storeName, style: TextStyle( fontWeight: FontWeight.bold,),), // Location
                                 Text("Price: \$${deal.price.toStringAsFixed(2)}"), // Price
-                                Text("Starts: ${formatDate(deal.start)}"), // Time
-                                Text("Ends: ${formatDate(deal.end)}"), // Time
+                                Text("Starts: ${deal.formatDate(deal.start)}"), // Time
+                                Text("Ends: ${deal.formatDate(deal.end)}"), // Time
                                            
                                            
                          

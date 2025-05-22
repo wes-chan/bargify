@@ -1,5 +1,7 @@
 
 
+import 'package:intl/intl.dart';
+
 class Deal {
   final String id;
   final String name;
@@ -38,9 +40,15 @@ class Deal {
     );
   }
 
+    String formatDate(DateTime time){
+    return DateFormat('dd-MM-yyyy').format(time);
+  }
+
 
 
 }
+
+
 
 class CategoryModel {
   static const List<String> categoryOptions = ['Electronics', 'Home & Living', 'Fashion', 'Toys & Games', 'Beauty', 'Automotive', 'Other'];
