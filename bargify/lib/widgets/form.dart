@@ -2,6 +2,9 @@ import 'package:bargify/constants.dart';
 import 'package:bargify/models/dealmodels.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:bargify/state/location_state.dart';
+import 'package:provider/provider.dart';
+
 
 
 class Forms extends StatefulWidget {
@@ -26,6 +29,8 @@ final _descriptionController = TextEditingController();
 // For displaying
 final _startController = TextEditingController();
 final _endController = TextEditingController();
+
+
 
 
 DateTime? _startDate; 
@@ -70,6 +75,10 @@ String? _selectedCategory;
      }
     }
 
+  @override
+
+
+
 
 
   // Start 
@@ -78,6 +87,8 @@ String? _selectedCategory;
   @override
 
   Widget build(BuildContext context) {
+
+
 
       return Scaffold(
 
@@ -190,6 +201,9 @@ String? _selectedCategory;
                            )),
                       
                        TextField(
+
+
+                      
                         controller: _locationController,
                          decoration: const InputDecoration(
                             labelText: 'Location',
