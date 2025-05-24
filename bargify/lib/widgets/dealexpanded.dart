@@ -46,18 +46,34 @@ import 'package:flutter/material.dart';
 
                 ),
                  SizedBox(height: 20),
+                 Text("Store Name:", style: TextStyle(fontWeight: FontWeight.bold)),
                  Text(deal.storeName),
+                 SizedBox(height: 8),
+                 Text("Location:", style: TextStyle(fontWeight: FontWeight.bold)),
                  Text(deal.location),
+                 SizedBox(height: 8),
+                 Text("Category:", style: TextStyle(fontWeight: FontWeight.bold)),
                  Text(deal.category),
+                 SizedBox(height: 8),
+                 Text("Price:", style: TextStyle(fontWeight: FontWeight.bold)),
                  Text("\$${deal.price.toStringAsFixed(2)}"),
+                 SizedBox(height: 8),
+                 Text("Start Date:", style: TextStyle(fontWeight: FontWeight.bold)),
                  Text(deal.formatDate(deal.start)),
+                 SizedBox(height: 8),
+                 Text("End Date:", style: TextStyle(fontWeight: FontWeight.bold)),
                  Text(deal.formatDate(deal.end)),
+                 SizedBox(height: 8),
 
                  const Divider(),
-                 Text("Description", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                 SizedBox(height: 8),
+                 Text("Description:", style: TextStyle( fontWeight: FontWeight.bold)),
                  Text(deal.description),
+                 SizedBox(height: 8),
                   const Divider(),
+                  SizedBox(height: 8),
        
+                
                 if (deal.imageURL != '') Image.network(deal.imageURL!)
                  
                  

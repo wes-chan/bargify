@@ -72,14 +72,34 @@ class _Account extends State<Account>{
                 children: [
                   CircleAvatar(
                     radius: 50,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16, bottom: 16),
-                    child: Text(
-                    'Hi, Guest',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    child: Icon(
+                      Icons.person,
+                      size: 60,
+                      color: Colors.white,
+                      
 
+                    )
+                   
                   ),
+                  StreamBuilder<User?>(
+                    stream: _auth.authStateChanges(),
+                    builder: (context, snapshot) {
+                        String greeting = "Hi, Guest";
+                         final user = snapshot.data;
+                         if (user != null){
+                          greeting = "Hi, User";
+                         }
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 16, bottom: 16),
+                        child: Text(
+                          greeting,
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          
+                        
+                      ),
+                    
+                      );
+                    }
                   ),
               
                   Row (
@@ -107,7 +127,7 @@ class _Account extends State<Account>{
                       
                         ),
                         icon: Icon(Icons.login, color: bgColor),
-                        label: Text("Log In", style: TextStyle(
+                        label: Text("Log In  ", style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),),
                       

@@ -361,6 +361,7 @@ Future<void> handleRegister() async{
   final email = _registerEmailController.text;
   final password = _registerPasswordController.text;
   final confirmPassword = _registerConfirmPasswordController.text;
+  
 
   if (password != confirmPassword){
      ScaffoldMessenger.of(context).showSnackBar(

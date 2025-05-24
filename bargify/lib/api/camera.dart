@@ -48,7 +48,7 @@ Future<String?> uploadFile(File file) async {
   return await snapshot.ref.getDownloadURL();
 
   } catch(e){
-    return "Upload failed. Please try again";
+    return null;
   }
 
 
