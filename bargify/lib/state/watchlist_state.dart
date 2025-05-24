@@ -49,6 +49,7 @@ class WatchListState extends ChangeNotifier{
                           'Price': deal.price,
                           'Start': deal.start,
                           'End': deal.end,
+                          'imageURL': deal.imageURL!,
         
                           });
 

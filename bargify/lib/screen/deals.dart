@@ -49,15 +49,18 @@ class _Deals extends State<Deals>{
   // Check if snapshot has data before using it
   if (!snapshot.hasData || snapshot.data == null || snapshot.data!.docs.isEmpty) {
     return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
+   
         child: Card(
           color: cardColor,
-            child: Text("No deals are currently available.", style: TextStyle(color: primaryColor),)
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text("No deals are available", style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold, fontSize: 18),),
+            )
+            
            
             ),
             
-      )
+      
 
     );
       

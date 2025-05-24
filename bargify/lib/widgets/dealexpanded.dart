@@ -56,6 +56,11 @@ import 'package:flutter/material.dart';
                  const Divider(),
                  Text("Description", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
                  Text(deal.description),
+                  const Divider(),
+       
+                if (deal.imageURL != '') Image.network(deal.imageURL!)
+                 
+                 
 
               ]
               
