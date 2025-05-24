@@ -12,6 +12,8 @@ class Deal {
   final double price;
   final DateTime start;
   final DateTime end;
+  final String? imageURL;
+  
 
   Deal({
     required this.id,
@@ -23,6 +25,7 @@ class Deal {
     required this.price,
     required this.start,
     required this.end,
+    this.imageURL,
   });
 
   factory Deal.fromFirestore(String id, Map<String, dynamic> data){
@@ -36,6 +39,7 @@ class Deal {
       price: data["Price"].toDouble(),
       start: data["Start"].toDate(),
       end: data["End"].toDate(),
+      imageURL: data["imageURL"]
       
     );
   }

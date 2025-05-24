@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:bargify/api/camera.dart';
 import 'package:bargify/constants.dart';
 import 'package:bargify/models/dealmodels.dart';
 import 'package:bargify/api/location.dart';
@@ -29,15 +32,22 @@ final _descriptionController = TextEditingController();
 // For displaying
 final _startController = TextEditingController();
 final _endController = TextEditingController();
+final _fileNameController = TextEditingController();
+
+final camera = Camera();
 
 
 bool _locationError = false;
+bool _loading = false;
 
 DateTime? _startDate; 
 DateTime? _endDate;
 String? _selectedCategory;
+String?  _imageURL;
+File? _file;
 
-@override
+
+@override 
   void dispose() {
     super.dispose();
   _titleController.dispose();
@@ -64,6 +74,8 @@ String? _selectedCategory;
     }
 
     Future<void> _openEndPicker() async{
+
+
      final selectedDate = await pickDate(context, DateTime.now(), DateTime.now(), DateTime(2100));
      if (selectedDate != null) {
       setState((){
@@ -75,7 +87,65 @@ String? _selectedCategory;
      }
     }
 
-  @override
+
+
+void _selectImage(){
+  showModalBottomSheet(context: context, builder: (modalContext) => 
+  
+  Padding(
+    padding: EdgeInsets.only(bottom: 40, top: 10), 
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ListTile(
+          leading: Icon(Icons.camera_alt),
+          title: Text("Upload via Camera"),
+          onTap: () async {
+   
+            Navigator.of(modalContext).pop();
+            final file = await camera.pickImage(ImageSource.camera);
+    
+            if (file != null){
+              setState((){
+                _file = file;
+                _fileNameController.text = file.path.split('/').last;
+    
+              });
+            }
+    
+          },
+        ),
+    
+         ListTile(
+          leading: Icon(Icons.photo_library),
+          title: Text("Upload via Gallery"),
+            onTap: () async {
+   
+            Navigator.of(modalContext).pop();
+            final file = await camera.pickImage(ImageSource.gallery);
+    
+            if (file != null){
+              setState((){
+                _file = file;
+                _fileNameController.text = file.path.split('/').last;
+    
+              });
+            }
+    
+          
+    
+          },
+    
+        ),
+    
+      ]
+    ),
+  )
+  );
+}
+
+
+
 
 
 
@@ -135,7 +205,7 @@ String? _selectedCategory;
                       children: [
                       TextField( 
                         decoration: const InputDecoration(
-                            labelText: 'Title',
+                            labelText: 'Title *',
                            ),
                             controller: _titleController,
                            ),
@@ -147,7 +217,7 @@ String? _selectedCategory;
                           Expanded(
                         child: DropdownButtonFormField<String>(
                             decoration: const InputDecoration(
-                              labelText: 'Category',
+                              labelText: 'Category *',
                             ),
                             items: CategoryModel.categoryOptions.map((String value){
                               return DropdownMenuItem<String>(
@@ -174,7 +244,7 @@ String? _selectedCategory;
                             child: TextField( 
                               controller: _priceController,
                               decoration: const InputDecoration(
-                               labelText: 'Price',
+                               labelText: 'Price *',
                                prefixText: '\$',
                            
                            ),
@@ -200,7 +270,7 @@ String? _selectedCategory;
                             controller: _storeNameController,
                              decoration: const InputDecoration(
                            
-                                labelText: 'Store Name',
+                                labelText: 'Store Name *',
                                )),
                             ),
 
@@ -208,9 +278,9 @@ String? _selectedCategory;
 
                             Expanded(
                           child: TextField(
-                          
+                            controller: _fileNameController,
                              decoration: InputDecoration(
-                              suffixIcon: IconButton(onPressed: () {}, icon: Icon(Icons.camera)),
+                              suffixIcon: IconButton(onPressed: _selectImage, icon: Icon(Icons.camera_alt)),
                            
                                 labelText: 'Image',
                                ),
@@ -233,7 +303,7 @@ String? _selectedCategory;
                         
                         controller: _locationController,
                          decoration: InputDecoration(
-                            labelText: 'Location',
+                            labelText: 'Location *',
                             suffixIcon: _locationError ? Tooltip (
                                 message: "Location permissions was disabled",
                                 child: Icon(Icons.warning_amber_rounded, color: Colors.redAccent),
@@ -288,7 +358,7 @@ String? _selectedCategory;
                             controller: _startController,
                             readOnly: true,
                             decoration: InputDecoration(
-                              labelText: 'Start',
+                              labelText: 'Start *',
                            
                             
          
@@ -305,7 +375,7 @@ String? _selectedCategory;
                             controller: _endController,
                             readOnly: true,
                             decoration: InputDecoration(
-                              labelText: 'End',
+                              labelText: 'End *',
                               enabled: _startDate != null,
                          
                             
@@ -338,7 +408,7 @@ String? _selectedCategory;
                         controller: _descriptionController,
                         decoration: const InputDecoration(
           
-                            labelText: 'Description',
+                            labelText: 'Description *',
                             
                            )),
          
@@ -348,7 +418,12 @@ String? _selectedCategory;
                   width: double.infinity,
                   child: ElevatedButton(
                            
-                    onPressed:() async {
+                    onPressed: _loading ? null : () async {
+
+                    setState(() {
+                     _loading = true;
+                      });
+
                  
                       if (double.tryParse(_priceController.text) == null){
                         
@@ -359,7 +434,7 @@ String? _selectedCategory;
                            backgroundColor: primaryColor,
                            )
                         );
-                        
+                        _loading = false;
                         return;
                       
                       }
@@ -381,9 +456,22 @@ String? _selectedCategory;
                            backgroundColor: primaryColor,
                         )
                           );
+                          _loading = false;
                           return;
             
                         }
+
+
+                      if(_file != null){
+                        _imageURL = await camera.uploadFile(_file!);
+                      }
+
+
+
+
+
+
+
          
                        final instance = Deal(
                         id: '',
@@ -395,6 +483,7 @@ String? _selectedCategory;
                         price: double.parse(_priceController.text),
                         start: _startDate!,
                         end: _endDate!,
+                        imageURL: _imageURL ?? '',
                        );
          
                         messenger.showSnackBar(
@@ -415,10 +504,12 @@ String? _selectedCategory;
                           'Price': instance.price,
                           'Start': instance.start,
                           'End': instance.end,
+                          'imageURL': _imageURL ?? '',
          
                         });
 
                         setState(() {
+                         _loading = false;
 
                         _titleController.clear();
                         _descriptionController.clear();
@@ -427,9 +518,12 @@ String? _selectedCategory;
                         _priceController.clear();
                         _startController.clear();
                         _endController.clear();
+                        _fileNameController.clear();
                         _startDate = null;
                         _endDate = null;
                         _selectedCategory = null;
+                        _file = null;
+                        _imageURL = null;
 
 
 
@@ -476,18 +570,6 @@ String? _selectedCategory;
             ),
        ),
         );
-   
-
-         
-        
-        
-         
-         
-  
-            
-         
-       
-        
     
 
     
@@ -503,11 +585,15 @@ String? _selectedCategory;
 }
 
 Future<DateTime?> pickDate(BuildContext context, DateTime initialDate, DateTime firstDate, DateTime lastDate){
-
 return showDatePicker(
   context: context,
   initialDate: initialDate,
   firstDate: firstDate,
   lastDate: lastDate,
 );
+
+
+
+
 }
+

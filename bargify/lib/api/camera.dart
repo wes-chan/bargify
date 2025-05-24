@@ -9,9 +9,9 @@ class Camera {
     final ImagePicker _picker = ImagePicker();
 
 
-Future<String?> pickAndUpload(ImageSource source) async { 
+Future<File?> pickImage(ImageSource source) async { 
 
-  final uuid = Uuid();
+  
   final image = await _picker.pickImage(source: source);
 
   if (image == null){
@@ -27,10 +27,19 @@ Future<String?> pickAndUpload(ImageSource source) async {
   if (fileSize > maxFile){
     return null;
   }
+  return file;
 
+
+}
+
+
+
+
+
+Future<String?> uploadFile(File file) async {
   try {
-
-     final storageRef = FirebaseStorage.instance.ref();
+  final uuid = Uuid();
+  final storageRef = FirebaseStorage.instance.ref();
 
   final uploadTask = storageRef.child('deal_image/${uuid.v4()}.jpg').putFile(file);
 
