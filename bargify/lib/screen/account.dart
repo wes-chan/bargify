@@ -1,5 +1,5 @@
 import 'package:bargify/constants.dart';
-import 'package:bargify/screen/login.dart';
+import 'package:bargify/widgets/login.dart';
 import 'package:bargify/state/watchlist_state.dart';
 import 'package:bargify/widgets/watchlist.dart';
 import 'package:flutter/material.dart';

@@ -87,7 +87,7 @@ class _WatchListState extends State<WatchList>{
 
       // Access the database of deals
         final deals = snapshot.data!.docs.map((doc){
-          print(doc.data());
+        
 
               final data = doc.data() as Map<String, dynamic>;
               return Deal.fromFirestore(doc.id, data);

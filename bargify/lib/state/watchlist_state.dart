@@ -31,6 +31,8 @@ class WatchListState extends ChangeNotifier{
 
   Future<void> toggleStar(Deal deal) async {
 
+    
+
     final data = FirebaseFirestore.instance.collection('users').doc(user!.uid).collection('watchlist').doc(deal.id);
 
     if(_watchListDealIds.contains(deal.id)){

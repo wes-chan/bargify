@@ -1,15 +1,15 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
-class LocationService{
+class Location{
 
-Future<String?> _determinePosition() async {
+Future<String?> determinePosition() async {
   bool serviceEnabled;
   LocationPermission permission;
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled){
-    return "Location services are disabled.";
+    return "";
 
   }
 
@@ -17,12 +17,12 @@ Future<String?> _determinePosition() async {
   if (permission == LocationPermission.denied){
     permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied){
-        return "Location permission are denied.";
+        return "";
       }
 
   }
   if (permission == LocationPermission.deniedForever){
-    return "Location permissions are permanently denied, we cannot request permissions.";
+    return "";
   }
 
   final LocationSettings locationSettings = LocationSettings(

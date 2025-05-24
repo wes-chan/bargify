@@ -54,6 +54,7 @@ class _LoginState extends State<Login> {
     
     
     return Scaffold(
+      
     
         appBar: AppBar(
            title: Text(isLogin ? 'Log In' : 'Register',
@@ -72,25 +73,27 @@ class _LoginState extends State<Login> {
       ),
      
         body: Center(
-             
-       
-    
-          
-          child: Card(
-            
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            elevation: 4,
-            color: cardColor,
-             margin: const EdgeInsets.only(left: 24, right: 24, bottom: kToolbarHeight+16),
-             
-         
-            child: Padding(
+          child: SingleChildScrollView(
+               
+                 
               
-              padding: const EdgeInsets.only(top: 24, bottom: 32,),
-              child: isLogin ? _loginPage() : _registerPage(),
-            )
+            
+            child: Card(
+              
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              elevation: 4,
+              color: cardColor,
+               margin: const EdgeInsets.only(left: 24, right: 24, bottom: kToolbarHeight+16),
+               
+           
+              child: Padding(
+                
+                padding: const EdgeInsets.only(top: 24, bottom: 32,),
+                child: isLogin ? _loginPage() : _registerPage(),
+              )
+            ),
           ),
         ),
       
@@ -190,6 +193,7 @@ class _LoginState extends State<Login> {
   }
 Widget _registerPage(){
     return Padding(
+      
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -444,7 +448,6 @@ Future<void> handleRegister() async{
 
 }
 
-    
 
 
 

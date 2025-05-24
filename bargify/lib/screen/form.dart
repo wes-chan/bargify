@@ -1,9 +1,9 @@
 import 'package:bargify/constants.dart';
 import 'package:bargify/models/dealmodels.dart';
+import 'package:bargify/api/location.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:bargify/state/location_state.dart';
-import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 
 
@@ -31,7 +31,7 @@ final _startController = TextEditingController();
 final _endController = TextEditingController();
 
 
-
+bool _locationError = false;
 
 DateTime? _startDate; 
 DateTime? _endDate;
@@ -89,7 +89,7 @@ String? _selectedCategory;
   Widget build(BuildContext context) {
 
 
-
+ final messenger = ScaffoldMessenger.of(context); 
       return Scaffold(
 
       appBar: AppBar(
@@ -193,20 +193,88 @@ String? _selectedCategory;
                       SizedBox(height: 10),
                       
          
-                      TextField(
-                        controller: _storeNameController,
-                         decoration: const InputDecoration(
-                       
-                            labelText: 'Store Name',
-                           )),
+                      Row(
+                        children: [
+                          Expanded(
+                          child: TextField(
+                            controller: _storeNameController,
+                             decoration: const InputDecoration(
+                           
+                                labelText: 'Store Name',
+                               )),
+                            ),
+
+                            SizedBox(width: 20),
+
+                            Expanded(
+                          child: TextField(
+                          
+                             decoration: InputDecoration(
+                              suffixIcon: IconButton(onPressed: () {}, icon: Icon(Icons.camera)),
+                           
+                                labelText: 'Image',
+                               ),
+                               readOnly: true,
+                               ),
+                               
+                            ),
+
+                            
+
+
+
+                               
+                        ],
+                      ),
                       
                        TextField(
 
 
-                      
+                        
                         controller: _locationController,
-                         decoration: const InputDecoration(
+                         decoration: InputDecoration(
                             labelText: 'Location',
+                            suffixIcon: _locationError ? Tooltip (
+                                message: "Location permissions was disabled",
+                                child: Icon(Icons.warning_amber_rounded, color: Colors.redAccent),
+                              
+                              )
+
+
+
+                            : IconButton(
+
+            
+                              icon: const Icon(Icons.map_outlined, color: primaryColor,), 
+                              onPressed: () async { 
+                                final locationService = Location();
+                                final address = await locationService.determinePosition();
+                                
+                                setState((){
+
+                                  if (address == null || address.isEmpty){
+                                 _locationError = true;
+
+                                 messenger.showSnackBar(  
+                                   SnackBar(
+                                    content: Text("Location service has been disabled or error occurred", style:TextStyle(color: bgColor),),
+                                    duration: Duration(seconds: 1),
+                                    backgroundColor: primaryColor,
+                           )
+
+                                 );
+
+
+                                  } else {
+                                     _locationError = false;
+                                     _locationController.text = address;
+                                  }
+                                  
+                                });
+                              },
+
+
+                            )
                            )),
          
                        SizedBox(height: 10),
@@ -259,8 +327,8 @@ String? _selectedCategory;
                         
                         
                        ),
-         
-         
+
+                    
          
          
          
@@ -281,7 +349,7 @@ String? _selectedCategory;
                   child: ElevatedButton(
                            
                     onPressed:() async {
-                       final messenger = ScaffoldMessenger.of(context); 
+                 
                       if (double.tryParse(_priceController.text) == null){
                         
                         messenger.showSnackBar(

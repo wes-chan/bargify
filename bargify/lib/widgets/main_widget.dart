@@ -2,7 +2,7 @@
 import 'package:bargify/constants.dart';
 import 'package:bargify/screen/account.dart';
 import 'package:bargify/screen/deals.dart';
-import 'package:bargify/widgets/form.dart';
+import 'package:bargify/screen/form.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
