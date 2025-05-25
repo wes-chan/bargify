@@ -22,6 +22,7 @@ class WatchListState extends ChangeNotifier{
 
   UnmodifiableSetView<String> get watchList => UnmodifiableSetView(_watchListDealIds);
 
+// Load the watchlist by scanning every instance of deals stored under their UID
   Future<void> loadWatchlist() async {
     if (user == null){
       return;
@@ -38,6 +39,7 @@ class WatchListState extends ChangeNotifier{
     notifyListeners();
 
   }
+// Main toggle system. It checks the user's list whether it is in the list or not.
 
 
   Future<void> toggleStar(Deal deal) async {

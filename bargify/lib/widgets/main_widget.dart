@@ -20,14 +20,9 @@ void _showForm(BuildContext context) {
     context,
     MaterialPageRoute(
       builder: (context) => const Forms()
-      
-      
-      )
+      ),
   );
 }
-
-
-
 
 class _NavKey extends State<NavKey>{
 
@@ -40,9 +35,10 @@ class _NavKey extends State<NavKey>{
   ];
 
   
-
 void _onItemTapped(int index){
+
   if (index == 1){
+    // Prevent non-logged in users from submitting form
     final user = FirebaseAuth.instance.currentUser;
     if (user == null){
 

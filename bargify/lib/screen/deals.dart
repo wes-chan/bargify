@@ -93,11 +93,11 @@ class _Deals extends State<Deals>{
                margin: const EdgeInsets.all(8),
                color: cardColor,
                 child: ListTile(
-                      //Placeholders 
+                    
                        leading: IconButton(
                         
                         onPressed: () async{
-                      
+                          // Disable users from utilising starring. Starring requires an account to store these listing
                           final messenger = ScaffoldMessenger.of(context); 
                           if (user == null){
                              messenger.showSnackBar(
@@ -138,30 +138,24 @@ class _Deals extends State<Deals>{
                        ),
                        
         
-                        // Category or Image?
+               
                        title: Text(deal.name,style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
         
-                       ),), // Name
+                       ),), 
                        subtitle: Padding(
                          padding: const EdgeInsets.only(top: 5),
                          child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(deal.storeName, style: TextStyle( fontWeight: FontWeight.bold,),), // Location
-                                Text("Price: \$${deal.price.toStringAsFixed(2)}"), // Price
-                                Text("Starts: ${deal.formatDate(deal.start)}"), // Time
-                                Text("Ends: ${deal.formatDate(deal.end)}"), // Time
-                                           
-                                           
+                                Text(deal.storeName, style: TextStyle( fontWeight: FontWeight.bold,),), 
+                                Text("Price: \$${deal.price.toStringAsFixed(2)}"), 
+                                Text("Starts: ${deal.formatDate(deal.start)}"),
+                                Text("Ends: ${deal.formatDate(deal.end)}"),        
                          
                               ],
-                         
-                          
-                         
-                         
-                         
+
                          ),
                        ),
                        trailing: Icon(Icons.arrow_forward_ios),
@@ -170,10 +164,7 @@ class _Deals extends State<Deals>{
                           );
                        }
                       ),
-              
-          
-            
-            
+
             );
        
           
@@ -187,9 +178,5 @@ class _Deals extends State<Deals>{
       }
     );
   }
-
-
-
-
 
 }

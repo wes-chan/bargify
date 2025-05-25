@@ -25,8 +25,6 @@ auth = auth ?? FirebaseAuth.instance;
 
 class _LoginState extends State<Login> {
 
-  
-
   final _loginEmailController = TextEditingController();
   final _loginPasswordController = TextEditingController();
   
@@ -45,7 +43,6 @@ class _LoginState extends State<Login> {
   }
 
   bool isLogin = true;
-
   bool loginSuccess = false;
 
 

@@ -23,14 +23,14 @@ class Forms extends StatefulWidget {
   
 class _Forms extends State<Forms> {
 
-// Controllers
+// Text Controller 
 final _titleController = TextEditingController();
 final _priceController = TextEditingController();
 final _storeNameController = TextEditingController();
 final _locationController = TextEditingController();
 final _descriptionController = TextEditingController();
 
-// For displaying
+// For displaying in Form
 final _startController = TextEditingController();
 final _endController = TextEditingController();
 final _fileNameController = TextEditingController();
@@ -41,14 +41,11 @@ final camera = Camera();
 bool _locationError = false;
 bool _loading = false;
 
-
-
 DateTime? _startDate; 
 DateTime? _endDate;
 String? _selectedCategory;
 String?  _imageURL;
 File? _file;
-
 
 @override 
   void dispose() {
@@ -154,7 +151,9 @@ void _selectImage(){
 
 
 
-  // Start 
+ 
+
+ // The start of the form
 
 
 
@@ -197,6 +196,7 @@ void _selectImage(){
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
+                
                   Center(
                     child: Text("Submit a new deal!", style: TextStyle(
                       fontSize: 24,
@@ -283,7 +283,7 @@ void _selectImage(){
 
                             Expanded(
                           child: TextField(
-                            controller: _fileNameController,
+                            controller: _fileNameController, // The image file name is stored
                              decoration: InputDecoration(
                               suffixIcon: IconButton(onPressed: _selectImage, icon: Icon(Icons.camera_alt)),
                            
@@ -305,6 +305,7 @@ void _selectImage(){
                        TextField(
 
 
+                        // If location has been disabled, icon changed to warning
                         
                         controller: _locationController,
                          decoration: InputDecoration(
@@ -319,6 +320,7 @@ void _selectImage(){
 
                             : IconButton(
 
+                          // If location has been enabled, main functionality works
             
                               icon: const Icon(Icons.map_outlined, color: primaryColor,), 
                               onPressed: () async { 
@@ -445,6 +447,8 @@ void _selectImage(){
                       }
                       
                       if (
+
+                        // If every field except image has not been filled.
                         _titleController.text.isEmpty ||
                         _priceController.text.isEmpty ||
                         _storeNameController.text.isEmpty ||
@@ -475,7 +479,7 @@ void _selectImage(){
 
 
 
-
+                      // Pushing ther information to database
 
          
                        final instance = Deal(
@@ -499,6 +503,7 @@ void _selectImage(){
                         )
                           );
          
+                        // The main submissions to the database
                         final data = firestore.collection('deals').doc();
                         await data.set({
                           'name': instance.name,

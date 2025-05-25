@@ -25,12 +25,12 @@ class _Account extends State<Account>{
       await _auth.signOut();
 
        if (!mounted) return;
-
+      // Stars needs to be cleared after logging out, to avoid stars appeared from previous session
       final watchListState = Provider.of<WatchListState>(context, listen: false);
       watchListState.clear();
 
       
-     
+    
 
       ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -55,7 +55,7 @@ class _Account extends State<Account>{
       body: ListView(
       children:[
         
-        
+        // The account widget that displays the profile, log out button and settings
         Card(
           margin: EdgeInsets.all(16),
          color: cardColor, 
@@ -71,6 +71,7 @@ class _Account extends State<Account>{
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // The profile picture avatar 
                   CircleAvatar(
                     radius: 50,
                     child: Icon(
@@ -94,7 +95,8 @@ class _Account extends State<Account>{
                   Row (
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                  children: [
-                  
+                
+                 // Show logout if users logged in. Show login if users logged out.
                   StreamBuilder<User?>(
                     stream: _auth.authStateChanges(),
                     builder: (context, snapshot) {
@@ -193,6 +195,8 @@ class _Account extends State<Account>{
              
         ),
 
+      // The main widget to access to Watch List
+
       Card(
               elevation: 4,
                margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8 ),
@@ -216,7 +220,7 @@ class _Account extends State<Account>{
                        onTap: () {
 
 
-                        
+                        // Disable access to Watch List if user is not logged in
                         if (_auth.currentUser == null){
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

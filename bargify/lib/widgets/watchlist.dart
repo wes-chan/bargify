@@ -107,7 +107,7 @@ class _WatchListState extends State<WatchList>{
                margin: const EdgeInsets.all(8),
                color: cardColor,
                 child: ListTile(
-                      //Placeholders 
+                      
                        leading: IconButton(
                         
                         onPressed: () async{
@@ -128,21 +128,21 @@ class _WatchListState extends State<WatchList>{
                        ),
                        
         
-                        // Category or Image?
+                        
                        title: Text(deal.name,style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
         
-                       ),), // Name
+                       ),), 
                        subtitle: Padding(
                          padding: const EdgeInsets.only(top: 5),
                          child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(deal.storeName, style: TextStyle( fontWeight: FontWeight.bold,),), // Location
-                                Text("Price: \$${deal.price.toStringAsFixed(2)}"), // Price
-                                Text("Starts: ${deal.formatDate(deal.start)}"), // Time
-                                Text("Ends: ${deal.formatDate(deal.end)}"), // Time
+                                Text(deal.storeName, style: TextStyle( fontWeight: FontWeight.bold,),),
+                                Text("Price: \$${deal.price.toStringAsFixed(2)}"), 
+                                Text("Starts: ${deal.formatDate(deal.start)}"), 
+                                Text("Ends: ${deal.formatDate(deal.end)}"), 
                                            
                                            
                          
