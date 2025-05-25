@@ -27,7 +27,7 @@ final signedOut = MockFirebaseAuth(signedIn: false);
   await tester.pumpAndSettle();
 
   expect(find.text('Please sign in to use Watch List'), findsOneWidget);
-   await tester.pumpAndSettle();
+
   
 
 

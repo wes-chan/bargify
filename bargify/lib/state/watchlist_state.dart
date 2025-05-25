@@ -42,6 +42,7 @@ class WatchListState extends ChangeNotifier{
 
   Future<void> toggleStar(Deal deal) async {
 
+
     
 
     final data = firestore.collection('users').doc(user!.uid).collection('watchlist').doc(deal.id);
@@ -60,7 +61,7 @@ class WatchListState extends ChangeNotifier{
                           'Price': deal.price,
                           'Start': deal.start,
                           'End': deal.end,
-                          'imageURL': deal.imageURL!,
+                          'imageURL': deal.imageURL ?? '',
         
                           });
 
