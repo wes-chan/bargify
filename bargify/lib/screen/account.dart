@@ -74,32 +74,20 @@ class _Account extends State<Account>{
                     radius: 50,
                     child: Icon(
                       Icons.person,
-                      size: 60,
+                      size: 50,
                       color: Colors.white,
                       
 
                     )
                    
                   ),
-                  StreamBuilder<User?>(
-                    stream: _auth.authStateChanges(),
-                    builder: (context, snapshot) {
-                        String greeting = "Hi, Guest";
-                         final user = snapshot.data;
-                         if (user != null){
-                          greeting = "Hi, User";
-                         }
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 16),
-                        child: Text(
-                          greeting,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          
-                        
-                      ),
-                    
-                      );
-                    }
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 16),
+                    child: Text(
+                    'Hello!',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+
+                  ),
                   ),
               
                   Row (
@@ -127,7 +115,7 @@ class _Account extends State<Account>{
                       
                         ),
                         icon: Icon(Icons.login, color: bgColor),
-                        label: Text("Log In  ", style: TextStyle(
+                        label: Text("Log In", style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),),
                       
