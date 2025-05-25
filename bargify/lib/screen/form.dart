@@ -11,7 +11,8 @@ import 'package:image_picker/image_picker.dart';
 
 
 class Forms extends StatefulWidget {
-  const Forms({super.key});
+  final FirebaseFirestore? firestore;
+  const Forms({super.key, this.firestore});
 
    @override
      State<Forms> createState() => _Forms();
@@ -39,6 +40,8 @@ final camera = Camera();
 
 bool _locationError = false;
 bool _loading = false;
+
+
 
 DateTime? _startDate; 
 DateTime? _endDate;
@@ -154,12 +157,14 @@ void _selectImage(){
   // Start 
 
 
+
   @override
 
   Widget build(BuildContext context) {
 
 
  final messenger = ScaffoldMessenger.of(context); 
+ final firestore = widget.firestore ?? FirebaseFirestore.instance;
       return Scaffold(
 
       appBar: AppBar(
@@ -494,7 +499,7 @@ void _selectImage(){
                         )
                           );
          
-                        final data = FirebaseFirestore.instance.collection('deals').doc();
+                        final data = firestore.collection('deals').doc();
                         await data.set({
                           'name': instance.name,
                           'Description': instance.description,
