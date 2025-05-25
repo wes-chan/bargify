@@ -11,18 +11,16 @@ import 'package:provider/provider.dart';
 
 
 class Deals extends StatefulWidget{
-  const Deals({super.key});
+  final FirebaseFirestore? firestore;
 
+  
+  const Deals({super.key, this.firestore});
   @override
   State<Deals> createState() => _Deals();
 }
 
 class _Deals extends State<Deals>{
-
-    final user = FirebaseAuth.instance.currentUser;
-
-    
-
+  User? get user => FirebaseAuth.instance.currentUser;
 
 
   @override
@@ -30,7 +28,7 @@ class _Deals extends State<Deals>{
 
   
     return StreamBuilder<QuerySnapshot>(
-      stream:  FirebaseFirestore.instance.collection('deals').snapshots(),
+      stream:  (widget.firestore ?? FirebaseFirestore.instance).collection('deals').snapshots(),
       builder: (context, snapshot) {
 
        if (snapshot.connectionState == ConnectionState.waiting) {
