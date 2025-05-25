@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 
 
 class Account extends StatefulWidget{
-  const Account ({super.key});
+    final FirebaseAuth? auth;
+  const Account ({super.key, this.auth});
 
   @override
   State<Account> createState() => _Account();
@@ -17,7 +18,7 @@ class Account extends StatefulWidget{
 class _Account extends State<Account>{
 
 
-     final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth get _auth => widget.auth ?? FirebaseAuth.instance;
    
 
      Future<void> _signOut() async {
