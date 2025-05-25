@@ -6,8 +6,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class WatchListState extends ChangeNotifier{
+  final FirebaseAuth? auth;
+  final FirebaseFirestore firestore;
+
+  WatchListState({
+    this.auth,
+    required this.firestore,
+  });
+
+
+
+
   final Set<String> _watchListDealIds = {};
-  User? get user => FirebaseAuth.instance.currentUser;
+  User? get user => auth?.currentUser;
 
   UnmodifiableSetView<String> get watchList => UnmodifiableSetView(_watchListDealIds);
 
@@ -16,7 +27,7 @@ class WatchListState extends ChangeNotifier{
       return;
     }
 
-    final snapshot = await FirebaseFirestore.instance.collection('users').doc(user!.uid).collection('watchlist').get();
+    final snapshot = await firestore.collection('users').doc(user!.uid).collection('watchlist').get();
 
     _watchListDealIds.clear();
 
@@ -33,7 +44,7 @@ class WatchListState extends ChangeNotifier{
 
     
 
-    final data = FirebaseFirestore.instance.collection('users').doc(user!.uid).collection('watchlist').doc(deal.id);
+    final data = firestore.collection('users').doc(user!.uid).collection('watchlist').doc(deal.id);
 
     if(_watchListDealIds.contains(deal.id)){
       await data.delete();
@@ -67,7 +78,7 @@ class WatchListState extends ChangeNotifier{
     }
 
 
-    await FirebaseFirestore.instance.collection('users').doc(user!.uid).collection('watchlist').doc(dealId).delete();
+    await firestore.collection('users').doc(user!.uid).collection('watchlist').doc(dealId).delete();
 
     _watchListDealIds.remove(dealId);
     notifyListeners();

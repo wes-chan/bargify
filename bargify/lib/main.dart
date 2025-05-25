@@ -2,6 +2,8 @@ import 'package:bargify/constants.dart';
 import 'package:bargify/firebase_options.dart';
 import 'package:bargify/state/watchlist_state.dart';
 import 'package:bargify/widgets/main_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +19,7 @@ void main() async{
   
   runApp(
      ChangeNotifierProvider(
-      create: (context) => WatchListState(),
+      create: (context) => WatchListState(auth: FirebaseAuth.instance, firestore: FirebaseFirestore.instance),
 
     
     

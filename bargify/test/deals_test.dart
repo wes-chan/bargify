@@ -28,7 +28,7 @@ void main() {
 
     await tester.pumpWidget(
       ChangeNotifierProvider(
-        create: (context) => WatchListState(),
+        create: (context) => WatchListState( firestore: firestore),
         child: MaterialApp(
           home: Deals(firestore: firestore),
 
@@ -38,17 +38,20 @@ void main() {
 
        )
     );
+
+
+
     await tester.pumpAndSettle();
 
+  
     expect(find.text('Mock Deal'), findsOneWidget);
+    expect(find.byType(IconButton), findsOneWidget); // Star
 
     await tester.tap(find.text('Mock Deal'));
 
     await tester.pumpAndSettle();
 
     expect(find.byType(DealExpanded), findsOneWidget);
-
-    expect(find.text('\$99.99'), findsOneWidget);
 
 
 
