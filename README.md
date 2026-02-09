@@ -1,4 +1,3 @@
-# Mobile Application Development Project for COMP3130
+# Bargify
+Bargify is a Flutter app for Macquarie University COMP3130 - Mobile App Development. It is an app that allows users to submit and view deals.
 
-This repository will contain your Flutter mobile app
-project for COMP3130.
